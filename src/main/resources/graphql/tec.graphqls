@@ -1,0 +1,59 @@
+
+type Query
+{
+    message: String
+    helloRandom: Int
+}
+
+
+# Comments in GraphQL strings start with the hash (#) symbol.
+  # This "Employee" type defines the queryable fields for every employee present in our data source.  
+  type Employee {
+    id: ID!
+    firstName: String
+    lastName: String
+    jobLevel: Int
+    #new
+    companyId: String
+    #new
+    fullName: String
+    #company: Company #Employee has a Company
+  }
+  
+  # new
+  type Company {
+    id: ID!
+    name: String
+    description: String
+    #employees : [Employee]
+  }
+  
+  # new
+  type Technology {
+    id: ID!
+    name: String
+    description: String
+  }
+  
+ schema{
+ query:Query
+}
+  # The "Query" type is special: it lists all of the available queries that
+  # clients can execute, along with the return type for each. 
+  # In this case, the "employees" query returns an array of zero or more Employees (defined above).
+  type Query {
+    employees: [Employee]
+    # new
+    companies: [Company]
+    #new
+    technologies :[Technology]
+    message: String
+    helloRandom :Int
+    employeeById(id:ID!): Employee
+    companyById(id:ID!): Company
+  }
+
+ type Mutation {
+   addMessage(name:String!): String!
+}
+  
